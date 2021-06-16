@@ -1,0 +1,70 @@
+<!-- 
+  build_all_comp.xml.
+  Marc MAZAS - Sopra Group - 06/2021.
+  Compiles with different compilers to different destinations.
+  The common compile target should be defined in the caller.
+-->
+
+<project name="pfinv_all_comp">
+
+  <target name="compileOra1-7">
+    <antcall target="compile">
+      <param name="param1" value="${Ora1-7}" />
+    </antcall>
+  </target>
+
+  <target name="compileOra1-8">
+    <antcall target="compile">
+      <param name="param1" value="${Ora1-8}" />
+    </antcall>
+  </target>
+
+  <target name="compileOra9">
+    <antcall target="compile">
+      <param name="param1" value="${Ora9}" />
+    </antcall>
+  </target>
+
+  <target name="compileOra10">
+    <antcall target="compile">
+      <param name="param1" value="${Ora10}" />
+    </antcall>
+  </target>
+
+  <target name="compileOra11">
+    <antcall target="compile">
+      <param name="param1" value="${Ora11}" />
+    </antcall>
+  </target>
+
+  <target name="compileOra12">
+    <antcall target="compile">
+      <param name="param1" value="${Ora12}" />
+    </antcall>
+  </target>
+
+  <target name="compileOra13">
+    <antcall target="compile">
+      <param name="param1" value="${Ora13}" />
+    </antcall>
+  </target>
+
+  <target name="compileOra14">
+    <antcall target="compile">
+      <param name="param1" value="${Ora14}" />
+    </antcall>
+  </target>
+
+  <target name="compileOra15">
+    <antcall target="compile">
+      <param name="param1" value="${Ora15}" />
+    </antcall>
+  </target>
+
+  <target name="compileOra16">
+    <antcall target="compile">
+      <param name="param1" value="${Ora16}" />
+    </antcall>
+  </target>
+
+</project>

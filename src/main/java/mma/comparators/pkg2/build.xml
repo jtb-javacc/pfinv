@@ -1,0 +1,225 @@
+<!-- 
+  build.xml for pkg2.
+  Marc MAZAS - Sopra Group - 06/2021.
+  Compiles with different compilers to different destinations.
+  Runs with HPROF only for JDK 1.8.
+  Runs with JFR (Java Flight Recorder) for JDK above ?.
+-->
+
+<project name="pfinv_comparators_pkg2" default="runAll">
+
+  <property name="ProjDir" value="C:/Devs/GitRepo/pfinv" />
+  <import file="${ProjDir}/build_props.xml" />
+
+  <property name="Package" value="mma.comparators.pkg2" />
+  <property name="PackageDir" value="mma/comparators/pkg2" />
+  <property name="MainClassName" value="${Package}.Compare_param_assigned" />
+  <property name="MyClassesDir" value="${ProjDir}/target/myclasses/${PackageDir}" />
+
+  <property name="ArchivedHprofOutDir" value="${ProjDir}/out/${PackageDir}" />
+  <property name="ArchivedHprofOutName" value="H_p_a-cpu" />
+  <property name="ArchivedJfrOutDir" value="${ProjDir}/out/${PackageDir}" />
+  <property name="ArchivedJfrOutName" value="JFR_p_a" />
+
+  <target name="compileAll"
+          depends="compileOra1-7, compileOra1-8, compileOra9, compileOra10, compileOra11,
+                   compileOra12, compileOra13, compileOra14, compileOra15, compileOra16"
+  >
+  </target>
+
+  <target name="runAll"
+          depends="compileAll, runOra1-7, runOra1-8, runOra9, runOra10, runOra11,
+                   runOra12, runOra13, runOra14, runOra15, runOra16"
+  >
+  </target>
+
+  <!-- All compile targets for each JDK are in imported from a common sub file -->
+  <import file="${ProjDir}/build_all_comp.xml" />
+
+  <!-- Need different JFR parameters for different JDK -->
+
+  <target name="runOra1-7">
+    <antcall target="run-1234">
+      <param name="param1" value="${Ora1-7}" />
+    </antcall>
+  </target>
+
+  <target name="runOra1-8">
+    <antcall target="run-1234">
+      <param name="param1" value="${Ora1-8}" />
+    </antcall>
+  </target>
+
+  <target name="runOra9">
+    <antcall target="run-1254">
+      <param name="param1" value="${Ora9}" />
+    </antcall>
+  </target>
+
+  <target name="runOra10">
+    <antcall target="run-1254">
+      <param name="param1" value="${Ora10}" />
+    </antcall>
+  </target>
+
+  <target name="runOra11">
+    <antcall target="run-254">
+      <param name="param1" value="${Ora11}" />
+    </antcall>
+  </target>
+
+  <target name="runOra12">
+    <antcall target="run-254">
+      <param name="param1" value="${Ora12}" />
+    </antcall>
+  </target>
+
+  <target name="runOra13">
+    <antcall target="run-254">
+      <param name="param1" value="${Ora13}" />
+    </antcall>
+  </target>
+
+  <target name="runOra14">
+    <antcall target="run-254">
+      <param name="param1" value="${Ora14}" />
+    </antcall>
+  </target>
+
+  <target name="runOra15">
+    <antcall target="run-254">
+      <param name="param1" value="${Ora15}" />
+    </antcall>
+  </target>
+
+  <target name="runOra16">
+    <antcall target="run-254">
+      <param name="param1" value="${Ora16}" />
+    </antcall>
+  </target>
+
+  <!-- Common compile target: param1 = the jdk name (see initial properties) -->
+  <target name="compile">
+    <mkdir dir="${MyClassesDir}/${param1}" />
+    <javac srcdir="${SrcDir}"
+           fork="yes"
+           destdir="${MyClassesDir}/${param1}"
+           executable="${JavaDir}/${param1}/bin/javac"
+           includeAntRuntime="false"
+    />
+  </target>
+
+  <!-- Common run target: param1 = the jdk name (see initial properties) -->
+  <target name="run-1234">
+    <java classname="${MainClassName}"
+          classpath="${MyClassesDir}/${param1}"
+          fork="yes"
+          jvm="C:/Program Files/Java/${param1}/bin/java.exe"
+          failonerror="false"
+    >
+      <!-- tune JIT first, then manually switch to profiling -->
+      <jvmarg value="${JfrJvmarg1}" />
+      <jvmarg value="${JfrJvmarg2}" />
+      <jvmarg value="${JfrJvmarg3}" />
+      <jvmarg value="${JfrJvmarg4}" />
+      <jvmarg value="${JfrJvmarg8}" />
+      <jvmarg value="${JfrJvmarg9}" />
+    </java>
+    <mkdir dir="${ArchivedJfrOutDir}/${param1}" />
+    <tstamp>
+      <format property="myts" pattern="yyD-HHmmss" />
+    </tstamp>
+    <move file="${JfrOutDir}/${JfrOutName}"
+          tofile="${ArchivedJfrOutDir}/${param1}/${ArchivedJfrOutName}-${myts}.jfr"
+          failonerror="false"
+    />
+  </target>
+
+  <target name="run-1254">
+    <java classname="${MainClassName}"
+          classpath="${MyClassesDir}/${param1}"
+          fork="yes"
+          jvm="C:/Program Files/Java/${param1}/bin/java.exe"
+          failonerror="false"
+    >
+      <!-- tune JIT first, then manually switch to profiling -->
+      <jvmarg value="${JfrJvmarg1}" />
+      <jvmarg value="${JfrJvmarg2}" />
+      <jvmarg value="${JfrJvmarg5}" />
+      <jvmarg value="${JfrJvmarg4}" />
+      <jvmarg value="${JfrJvmarg8}" />
+      <jvmarg value="${JfrJvmarg9}" />
+    </java>
+    <mkdir dir="${ArchivedJfrOutDir}/${param1}" />
+    <tstamp>
+      <format property="myts" pattern="yyD-HHmmss" />
+    </tstamp>
+    <move file="${JfrOutDir}/${JfrOutName}"
+          tofile="${ArchivedJfrOutDir}/${param1}/${ArchivedJfrOutName}-${myts}.jfr"
+          failonerror="false"
+    />
+  </target>
+
+  <target name="run-254">
+    <java classname="${MainClassName}"
+          classpath="${MyClassesDir}/${param1}"
+          fork="yes"
+          jvm="C:/Program Files/Java/${param1}/bin/java.exe"
+          failonerror="false"
+    >
+      <!-- tune JIT first, then manually switch to profiling -->
+      <jvmarg value="${JfrJvmarg2}" />
+      <jvmarg value="${JfrJvmarg5}" />
+      <jvmarg value="${JfrJvmarg4}" />
+      <jvmarg value="${JfrJvmarg8}" />
+      <jvmarg value="${JfrJvmarg9}" />
+    </java>
+    <mkdir dir="${ArchivedJfrOutDir}/${param1}" />
+    <tstamp>
+      <format property="myts" pattern="yyD-HHmmss" />
+    </tstamp>
+    <move file="${JfrOutDir}/${JfrOutName}"
+          tofile="${ArchivedJfrOutDir}/${param1}/${ArchivedJfrOutName}-${myts}.jfr"
+          failonerror="false"
+    />
+  </target>
+
+  <target name="run">
+    <java classname="${MainClassName}"
+          classpath="${MyClassesDir}/${param1}"
+          fork="yes"
+          jvm="C:/Program Files/Java/${param1}/bin/java.exe"
+          failonerror="false"
+    >
+      <!-- tune JIT first, then manually switch to profiling -->
+      <jvmarg value="${JfrJvmarg1}" />
+      <jvmarg value="${JfrJvmarg2}" />
+      <jvmarg value="${JfrJvmarg3}" />
+      <jvmarg value="${JfrJvmarg4}" />
+      <jvmarg value="${JfrJvmarg8}" />
+      <jvmarg value="${JfrJvmarg9}" />
+      <!-- 
+      <jvmarg value="${HprofCpuTimes}" />
+      <jvmarg value="-XX:+PrintCompilation" />
+      -->
+    </java>
+    <!-- 
+    <mkdir dir="${ArchivedJPSnapshotsDir}/${param1}" />
+    <tstamp>
+      <format property="myts" pattern="yyD-HHmmss" />
+    </tstamp>
+    <move file="${HprofOutDir}/${HprofOutName}"
+          tofile="${ArchivedHprofOutDir}/${param1}/${ArchivedHprofOutName}-${myts}.txt"
+    />
+    -->
+    <mkdir dir="${ArchivedJfrOutDir}/${param1}" />
+    <tstamp>
+      <format property="myts" pattern="yyD-HHmmss" />
+    </tstamp>
+    <move file="${JfrOutDir}/${JfrOutName}"
+          tofile="${ArchivedJfrOutDir}/${param1}/${ArchivedJfrOutName}-${myts}.jfr"
+          failonerror="false"
+    />
+  </target>
+
+</project>

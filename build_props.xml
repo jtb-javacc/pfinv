@@ -1,0 +1,51 @@
+<!-- 
+  build_props.xml.
+  Marc MAZAS - Sopra Group - 06/2021.
+  Sets compilers and executables properties.
+-->
+<project name="pfinv_props">
+
+  <property name="SrcDir" value="${ProjDir}/src/main/java" />
+
+  <property name="Ora1-7" value="jdk1.7.0_99" />
+  <property name="Ora1-8" value="jdk1.8.0_281" />
+  <property name="Ora9" value="jdk-9.0.4" />
+  <property name="Ora10" value="jdk-10.0.2" />
+  <property name="Ora11" value="jdk-11.0.10" />
+  <property name="Ora12" value="jdk-12.0.2" />
+  <property name="Ora13" value="jdk-13.0.2" />
+  <property name="Ora14" value="jdk-14.0.2" />
+  <property name="Ora15" value="jdk-15.0.2" />
+  <property name="Ora16" value="jdk-16.0.1" />
+
+  <property name="JavaDir" value="C:/Program Files/Java" />
+
+  <property name="JProfilerDir" value="C:/Program Files/jprofiler10" />
+  <property name="JProfilerDll" value="${JProfilerDir}/bin/windows-x64/jprofilerti.dll" />
+  <property name="JProfilerAgentPath"
+            value="-agentpath:${JProfilerDll}=port=8849,offline,id=208,config=C:\Users\mmazas\.jprofiler10\config.xml"
+  />
+  <property name="JPSnapshotsDir" value="${ProjDir}/out" />
+  <property name="JPSnapshotName" value="pfinv.jps" />
+
+  <property name="HprofCpuTimes" value="-agentlib:hprof=cpu=times" />
+  <property name="HprofOutDir" value="${ProjDir}" />
+  <property name="HprofOutName" value="java.hprof.txt" />
+
+  <property name="JfrOutDir" value="${ProjDir}" />
+  <!-- created with JMC v8, format not compatible for JDK 1.7/1.8 -->
+  <property name="JfrConfFile" value="${ProjDir}/src/main/resources/CpuHigh.jfc" />
+  <property name="JfrOutName" value="flight.jfr" />
+  <property name="JfrJvmarg1" value="-XX:+UnlockCommercialFeatures" />
+  <property name="JfrJvmarg2" value="-XX:+FlightRecorder" />
+  <property name="JfrJvmarg3"
+            value="-XX:FlightRecorderOptions=dumponexit=true,dumponexitpath=${JfrOutDir}/${JfrOutName}"
+  />
+  <property name="JfrJvmarg4"
+            value="-XX:StartFlightRecording=dumponexit=true,filename=${JfrOutDir}/${JfrOutName}"
+  />
+  <property name="JfrJvmarg5" value="-XX:StartFlightRecording=disk=false,settings=${JfrConfFile}" />
+  <property name="JfrJvmarg8" value="-XX:+UnlockDiagnosticVMOptions" />
+  <property name="JfrJvmarg9" value="-XX:+DebugNonSafepoints" />
+
+</project>

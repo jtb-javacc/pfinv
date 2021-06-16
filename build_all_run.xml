@@ -1,0 +1,70 @@
+<!-- 
+  build_all_run.xml.
+  Marc MAZAS - Sopra Group - 06/2021.
+  Runs the different compiled classes.
+  The common run target should be defined in the caller.
+-->
+
+<project name="pfinv_all_run">
+
+  <target name="runOra1-7">
+    <antcall target="run">
+      <param name="param1" value="${Ora1-7}" />
+    </antcall>
+  </target>
+
+  <target name="runOra1-8">
+    <antcall target="run">
+      <param name="param1" value="${Ora1-8}" />
+    </antcall>
+  </target>
+
+  <target name="runOra9">
+    <antcall target="run">
+      <param name="param1" value="${Ora9}" />
+    </antcall>
+  </target>
+
+  <target name="runOra10">
+    <antcall target="run">
+      <param name="param1" value="${Ora10}" />
+    </antcall>
+  </target>
+
+  <target name="runOra11">
+    <antcall target="run">
+      <param name="param1" value="${Ora11}" />
+    </antcall>
+  </target>
+
+  <target name="runOra12">
+    <antcall target="run">
+      <param name="param1" value="${Ora12}" />
+    </antcall>
+  </target>
+
+  <target name="runOra13">
+    <antcall target="run">
+      <param name="param1" value="${Ora13}" />
+    </antcall>
+  </target>
+
+  <target name="runOra14">
+    <antcall target="run">
+      <param name="param1" value="${Ora14}" />
+    </antcall>
+  </target>
+
+  <target name="runOra15">
+    <antcall target="run">
+      <param name="param1" value="${Ora15}" />
+    </antcall>
+  </target>
+
+  <target name="runOra16">
+    <antcall target="run">
+      <param name="param1" value="${Ora16}" />
+    </antcall>
+  </target>
+
+</project>

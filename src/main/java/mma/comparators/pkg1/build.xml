@@ -1,0 +1,84 @@
+<!-- 
+  build.xml for pkg1.
+  Marc MAZAS - Sopra Group - 16/03/2006, 06/2021.
+  Compiles with different compilers to different destinations.
+  Runs with JProfiler10 offline profiling.
+-->
+
+<project name="pfinv_comparators_pkg1" default="runAll">
+
+  <property name="ProjDir" value="C:/Devs/GitRepo/pfinv" />
+  <import file="${ProjDir}/build_props.xml" />
+
+  <property name="Package" value="mma.comparators.pkg1" />
+  <property name="PackageDir" value="mma/comparators/pkg1" />
+  <property name="MainClassName" value="${Package}.Compare_sc_gs_hh" />
+  <property name="MyClassesDir" value="${ProjDir}/target/myclasses/${PackageDir}" />
+
+  <property name="ArchivedJPSnapshotsDir" value="${JPSnapshotsDir}/${PackageDir}" />
+  <property name="ArchivedJPSnapshotName" value="C_sc_gs_hh-cpu" />
+
+  <target name="clean">
+    <delete>
+      <fileset dir="${MyClassesDir}" includes="**/*.class" />
+    </delete>
+
+  </target>
+
+  <target name="compileAll"
+          depends="compileOra1-7, compileOra1-8, compileOra9, compileOra10, compileOra11,
+                   compileOra12, compileOra13, compileOra14, compileOra15, compileOra16"
+  >
+  </target>
+
+  <target name="runAll"
+          depends="compileAll, runOra1-7, runOra1-8, runOra9, runOra10, runOra11,
+                   runOra12, runOra13, runOra14, runOra15, runOra16"
+  >
+  </target>
+
+  <!-- All compile targets for each JDK are in imported from a common sub file -->
+  <import file="${ProjDir}/build_all_comp.xml" />
+
+  <!-- All run targets for each JDK are in imported from a common sub file -->
+  <import file="${ProjDir}/build_all_run.xml" />
+
+  <!-- Common compile target: param1 = the jdk name (see initial properties) -->
+  <target name="compile">
+    <mkdir dir="${MyClassesDir}/${param1}" />
+    <javac srcdir="${SrcDir}"
+           fork="yes"
+           destdir="${MyClassesDir}/${param1}"
+           executable="${JavaDir}/${param1}/bin/javac"
+           includeAntRuntime="false"
+    />
+    <!-- needed above if using the API -->
+    <!-- classpath="${JProfilerDir}\bin\agent.jar" -->
+  </target>
+
+  <!-- Common run target: param1 = the jdk name (see initial properties) -->
+  <target name="run">
+    <java classname="${MainClassName}"
+          classpath="${MyClassesDir}/${param1}"
+          fork="yes"
+          jvm="C:/Program Files/Java/${param1}/bin/java.exe"
+          failonerror="true"
+    >
+      <!-- tune JIT first, then manually switch to profiling and archiving snapshot -->
+      <jvmarg value="${JProfilerAgentPath}" />
+      <!-- 
+      <jvmarg value="-XX:+PrintCompilation" />
+      -->
+    </java>
+    <!-- 
+    -->
+    <mkdir dir="${ArchivedJPSnapshotsDir}/${param1}" />
+    <tstamp>
+      <format property="myts" pattern="yyD-HHmmss" />
+    </tstamp>
+    <move file="${JPSnapshotsDir}/${JPSnapshotName}"
+          tofile="${ArchivedJPSnapshotsDir}/${param1}/${ArchivedJPSnapshotName}-${myts}.jps"
+    />
+  </target>
+
+</project>
