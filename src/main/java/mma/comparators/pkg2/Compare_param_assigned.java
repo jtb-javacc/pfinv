@@ -13,43 +13,43 @@ package mma.comparators.pkg2;
     "static-method", "unused", "javadoc"
 })
 public class Compare_param_assigned {
-
+  
   private static final long NBCALLS = 10000000; // 100000000 without profiling
   private static final long NBLOOPS = 100;      // 100 without profiling
   private static long       total   = 0;
-
+  
   public Compare_param_assigned() {
     //
   }
-
+  
   public static void main(final String[] aArgs) {
-    
+
     System.out.println("Starting...          ; mx   ; mxn  ; mxf  ; mx_f ; mxf_f");
-    
+
     final Compare_param_assigned pt = new Compare_param_assigned();
-
+    
     run_public(pt);
-    System.gc();
+    // System.gc();
     run_protected(pt);
-    System.gc();
+    // System.gc();
     run_package(pt);
-    System.gc();
+    // System.gc();
     run_private(pt);
-
+    
     System.out.println("total = " + total);
   }
-  
+
   private static void run_public(final Compare_param_assigned pt) {
-    
+
     long et;
     long bt;
     long tp;
     long ctr;
     final long[] tpa = new long[5];
-    
+
     for (int k = 0; k < NBLOOPS; k++) {
       int l = 0;
-      
+
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -60,7 +60,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-      
+
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -71,7 +71,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-      
+
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -82,7 +82,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-      
+
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -93,7 +93,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-      
+
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -104,7 +104,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-      
+
     }
     System.out.print("results for public   ; ");
     for (int m = 0; m < 5; m++) {
@@ -112,18 +112,18 @@ public class Compare_param_assigned {
     }
     System.out.println();
   }
-  
-  private static void run_protected(final Compare_param_assigned pt) {
 
+  private static void run_protected(final Compare_param_assigned pt) {
+    
     long et;
     long bt;
     long tp;
     long ctr;
     final long[] tpa = new long[5];
-
+    
     for (int k = 0; k < NBLOOPS; k++) {
       int l = 0;
-
+      
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -134,7 +134,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-
+      
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -145,7 +145,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-
+      
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -156,7 +156,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-
+      
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -167,7 +167,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-
+      
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -178,7 +178,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-
+      
     }
     System.out.print("results for protected; ");
     for (int m = 0; m < 5; m++) {
@@ -186,18 +186,18 @@ public class Compare_param_assigned {
     }
     System.out.println();
   }
-  
-  private static void run_package(final Compare_param_assigned pt) {
 
+  private static void run_package(final Compare_param_assigned pt) {
+    
     long et;
     long bt;
     long tp;
     long ctr;
     final long[] tpa = new long[5];
-
+    
     for (int k = 0; k < NBLOOPS; k++) {
       int l = 0;
-
+      
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -208,7 +208,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-
+      
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -219,7 +219,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-
+      
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -230,7 +230,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-
+      
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -241,7 +241,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-
+      
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -252,7 +252,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-
+      
     }
     System.out.print("results for package  ; ");
     for (int m = 0; m < 5; m++) {
@@ -260,18 +260,18 @@ public class Compare_param_assigned {
     }
     System.out.println();
   }
-  
-  private static void run_private(final Compare_param_assigned pt) {
 
+  private static void run_private(final Compare_param_assigned pt) {
+    
     long et;
     long bt;
     long tp;
     long ctr;
     final long[] tpa = new long[5];
-
+    
     for (int k = 0; k < NBLOOPS; k++) {
       int l = 0;
-
+      
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -282,7 +282,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-
+      
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -293,7 +293,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-
+      
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -304,7 +304,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-
+      
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -315,7 +315,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-
+      
       bt = System.currentTimeMillis();
       ctr = 0;
       for (long j = 0; j < NBCALLS; j++) {
@@ -326,7 +326,7 @@ public class Compare_param_assigned {
       tp = et - bt;
       tpa[l++] += tp;
       total += (ctr > 0 ? 1 : -1);
-
+      
     }
     System.out.print("results for private  ; ");
     for (int m = 0; m < 5; m++) {
@@ -334,105 +334,105 @@ public class Compare_param_assigned {
     }
     System.out.println();
   }
-  
+
   /* public */
-  
+
   public void mu(long aI) {
     aI++;
   }
-  
+
   public void mun(final long aI) {
     long i = aI;
     i++;
   }
-
+  
   public final void muf(long aI) {
     aI++;
   }
-
+  
   public void mu_f(final long aI) {
     long i = aI;
     i++;
   }
-
+  
   public final void muf_f(final long aI) {
     long i = aI;
     i++;
   }
-  
-  /* protected */
 
+  /* protected */
+  
   protected void mo(long aI) {
     aI++;
   }
-
+  
   protected void mon(final long aI) {
     long i = aI;
     i++;
   }
-
+  
   protected final void mof(long aI) {
     aI++;
   }
-  
+
   protected void mo_f(final long aI) {
     long i = aI;
     i++;
   }
-  
+
   protected final void mof_f(final long aI) {
     long i = aI;
     i++;
   }
-  
+
   /* package */
-  
+
   void mp(long aI) {
     aI++;
   }
-  
+
   void mpn(final long aI) {
     long i = aI;
     i++;
   }
-  
+
   final void mpf(long aI) {
     aI++;
   }
-  
+
   void mp_f(final long aI) {
     long i = aI;
     i++;
   }
-
+  
   final void mpf_f(final long aI) {
     long i = aI;
     i++;
   }
-  
+
   /* private */
-  
+
   private void mi(long aI) {
     aI++;
   }
-  
+
   private void min(final long aI) {
     long i = aI;
     i++;
   }
-  
+
   private final void mif(long aI) {
     aI++;
   }
-  
+
   private void mi_f(final long aI) {
     long i = aI;
     i++;
   }
-  
+
   private final void mif_f(final long aI) {
     long i = aI;
     i++;
   }
-
+  
 }
